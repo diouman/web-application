@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head><title>Login</title>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head><h:body>
+<f:view>
+<h:form>
+	<div id="logo">
+	
+		<div id="bolom">
+			<h:graphicImage  value="/resources/icon/2Restoran.png" width="150px" ></h:graphicImage>
+		</div>
+		
+		<div id="text">
+			<h:graphicImage  value="/resources/icon/text.png" ></h:graphicImage>
+		</div>
+	</div>
+	<div>
+		<h:commandButton immediate="true" id="logout" image="/resources/icon/56805.png"  action="/faces/login.xhtml" style="width:50px; height:50px; float:right; margin-top:-90px;">
+		
+		 </h:commandButton>
+	</div>
+	<p:tabView dynamic="false" cache="true">
+		<p:tab title="Best Customer">
+			<p:chart type="bar" model="#{graphController.barModel}" style="height:400px"/>
+		</p:tab>
+		
+		<p:tab title="Revenue per Customer">
+			<p:chart type="pie" model="#{graphController.pieModel1}" style="height:400px" />
+		</p:tab>
+		
+		<p:tab title="Best Selling Menu">
+			<p:chart type="line" model="#{graphController.lineModel2}" style="height:400px;"/>
+		</p:tab>
+	</p:tabView>
+	
+	<p:dock position="bottom">
+	    <p:menuitem value="Home" icon="/resources/icon/home.png" url="home.xhtml"/>
+	</p:dock>
+	
+	<p:tooltip for="logout" value="Logout" showEffect="clip" position="left"></p:tooltip>
+
+
+
+
+	
+	
+	
+ 	
+</h:form>
+</f:view>
+</h:body>
+</html>

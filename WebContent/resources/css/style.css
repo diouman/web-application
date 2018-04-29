@@ -1,0 +1,194 @@
+
+#nav{
+	width:75%;
+	margin-left:auto;
+	margin-right: auto;
+	margin-top: 100px;
+}
+
+#logo{
+	margin-top: -50px;
+	margin-left:400px;
+	margin-right: auto;
+	
+}
+
+.icon{
+	padding:10px;
+}
+
+#logout{
+	width:50px;
+	height: 50px;
+	float: right;
+}
+
+#container{
+	width: 25%;
+	background-color: 
+	padding:20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 125px;
+}
+
+#loginDiv{
+	width: 60%;
+	padding:10px;
+	margin-left: auto;
+	margin-right: auto;
+	
+	
+	
+}
+
+#bolom{
+	width:200px;
+	
+}
+
+#text{
+	width:400px;
+	margin-left:110px;
+	margin-top: -135px;
+}
+
+body{
+	background-color: #dcc8e0;
+}
+
+
+.order-table{
+	border-collapse:collapse;
+	width: 100%;
+	padding: 20px;
+	cell-border : 1px solid black;
+	height:225px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #DADADA;
+	border-bottom:1px solid black;
+	padding:8px;
+	font-size: 18px;
+	border: 1px solid #ddd;
+	cell-border : 1px solid black ;
+	color: #4F4F4F;
+	width: 25px;
+}
+
+.order-table-odd-row{
+	border: 1px solid #ddd;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid black;
+	cell-border : 1px solid black;
+	font-size: 18px;
+	padding:50px;
+	color: #4F4F4F;
+}
+
+.order-table-even-row{
+	border: 1px solid #ddd;
+	background:none repeat scroll 0 0 #F2F5F9;
+	border-top:1px solid #BBBBBB;
+	cell-border : 1px solid black;
+	font-size: 18px;
+	padding:50px;
+	color: #4F4F4F;
+}
+
+#scrollCust{
+	width:100%;
+	height:225px;	
+	overflow: hidden;
+	overflow-y:scroll;
+}
+
+#addCust{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: red;
+}
+
+#addCust table tr,#addCust table tr td{
+	padding:10px;
+}
+
+#pnlCust{
+	margin-left: 25%;
+}
+
+
+
+.tblMenu  {
+    border-collapse:collapse;
+	width: 100%;
+	border: 1px solid #ddd;
+	cell-border : 1px solid black;	
+	overflow-y:scroll;
+	height:175px;
+	margin-left: auto;
+	margin-right: auto;
+	
+	
+}
+
+.tblMenu  td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.tblMenu  tr:nth-child(odd){
+	border: 1px solid #333;
+	background:none repeat scroll 0 0 #F2F5F9;
+	border-top:1px solid #333;
+	cell-border : 1px solid black;
+	font-size: 18px;
+	padding:5px;
+	color: #4F4F4F;}
+
+.tblMenu  tr:nth-child(even){
+	border: 1px solid #ddd;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+	cell-border : 1px solid black;
+	font-size: 18px;
+	padding:5px;
+	color: #4F4F4F;
+}
+.tblMenu th, #selectedMenu th {
+    text-align:center;
+	background:none repeat scroll 0 0 #DADADA;
+	border-bottom:1px solid #BBBBBB;
+	padding:5px;
+	font-size: 18px;
+	border: 1px solid #ddd;
+	cell-border : 1px solid black ;
+	color: #4F4F4F;
+	width: 25px;
+}
+
+#scroll{
+	width:95%;
+	height:175px;	
+	overflow: hidden;
+	overflow-y:scroll;
+	margin-left: auto;
+	margin-right: auto;
+
+	
+}
+
+.button{
+	padding: 5px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #7BC2F0;
+}

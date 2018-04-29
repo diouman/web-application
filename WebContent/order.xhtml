@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"	
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+    xmlns:of="http://omnifaces.org/functions"
+  
+     >
+
+<h:head><title>Place Order</title></h:head>
+<link href="${facesContext.externalContext.requestContextPath}/resources/css/style.css"  rel="stylesheet" type="text/css"/>
+<h:body>
+
+<f:view>
+<h:form>
+	<div id="logo">
+	
+		<div id="bolom">
+			<h:graphicImage  value="/resources/icon/2Restoran.png" width="150px" ></h:graphicImage>
+		</div>
+		
+		<div id="text">
+			<h:graphicImage  value="/resources/icon/text.png" ></h:graphicImage>
+		</div>
+	</div>
+	<div>
+		<h:commandButton immediate="true" id="logout" image="/resources/icon/56805.png"  action="logout" style="width:50px; height:50px; float:right; margin-top:-100px;"> 
+			<o:skipValidators></o:skipValidators>
+		</h:commandButton>
+	</div>
+	<p:tooltip></p:tooltip>
+
+	<p:tabView dynamic="false" cache="false">
+		<p:tab title="Place Order Here">
+			<h3 style="text-align:center">Place Order</h3>
+			<h:outputText value="Select Customer:   "></h:outputText>
+			<p:selectOneMenu value="#{orderMenuController.cId}"   label="Customer" required="true" update="@form" filter="true" filterMatchMode="contains" >
+				<f:selectItem itemLabel="Select Customer" itemValue="" noSelectionOption="true" />
+				<f:selectItems value="#{customerController.list}"/>
+			</p:selectOneMenu>
+			
+			<h:outputText value="Order Number:   "></h:outputText>
+			<h:outputText value="#{orderMenuController.Oid()}"></h:outputText>
+			<br></br>			
+			<br></br>
+			
+			<p:dataTable var="m" value="#{menuController.hgetAllMenus()}" scrollable="true" scrollHeight="200"  >
+			
+				<p:column headerText="Menu Id" >
+					<h:outputText value="#{m.mId}"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Menu Name">
+					<h:outputText value="#{m.mDesc}"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Menu Price">
+					<h:outputText value="#{m.mPrice}"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Order Menu">
+					<p:growl id="order" showDetail="true" sticky="false" />
+					<p:commandLink value="Order" actionListener="#{orderMenuController.orderBy(m)}" update="order @form" >
+						<p:confirm header="Confirmation" message="Are you sure to order menu?" icon="ui-icon-alert" />			
+					</p:commandLink>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  />
+						<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>	
+				</p:column>
+				
+			</p:dataTable>
+		</p:tab>
+		
+		
+		<p:tab  title="Confirm Order Here" id="tab">
+		
+			<h3 style="text-align:center;">Confirm Order</h3>
+           	Customer : <h:outputText value="#{orderMenuController.custName()}"></h:outputText>
+           
+           	<p:dataTable var="it" value="#{orderMenuController.cart}" id="orderTable" scrollable="true" scrollHeight="150">
+				
+				<p:column headerText="Menu Name">
+					<h:outputText value="#{it.menu.mDesc}"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Menu Price">
+					<h:outputText value="#{it.menu.mPrice}"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Menu Quantity">
+					 <p:spinner value="#{it.qty}" size="2" action="#{it.qty}" label="Quantity" min="1">
+					 	<o:skipValidators></o:skipValidators>
+					 	<f:validateLongRange minimum="1"></f:validateLongRange>	
+					 	<p:ajax listener="#{orderMenuController.calcSubTotal(it)}" update="orderTable"></p:ajax>				 			 					 	
+					 </p:spinner>					 
+					
+				</p:column>
+				
+				<p:column headerText="Subtotal">
+					 <h:outputText value="#{it.subTotal}" id="subtotal"></h:outputText>
+				</p:column>
+				
+				<p:column headerText="Action">
+					<p:growl id="message" showDetail="true" sticky="false"/>
+					 <p:commandLink  immediate="true" value="Delete" actionListener="#{orderMenuController.delProd(it)}" update="message @form"  >
+					 	<p:confirm header="Confirmation" message="Are you sure to delete menu?" icon="ui-icon-alert" />
+					 </p:commandLink>
+					 
+					 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				    </p:confirmDialog>
+				</p:column>
+		        <p:columnGroup type="footer">
+		            <p:row>
+		                <p:column colspan="3" style="text-align:left" footerText="Sum: #{orderMenuController.total }" id="total" />		                
+		            </p:row>
+		        </p:columnGroup>
+			</p:dataTable>
+			<br></br>
+			<p:outputLabel for="date" value="Date: " />
+	        <p:calendar id="date"  showOn="button" value="#{orderMenuController.date}" label="Date"/>
+	                	
+        	<h:outputText value="  "></h:outputText>
+        	
+			<p:outputLabel for="time" value="Time:" />
+       		<p:calendar id="time" value="#{orderMenuController.time}" pattern="HH:mm" timeOnly="true" showOn="button" label="Time"/>
+			
+			<br></br>
+			<br></br>
+			<p:growl id="result" showDetail="true" sticky="false" />  
+			
+			<p:commandButton styleClass="ui-priority-primary" value="Save Order" actionListener="#{orderMenuController.addOrder() }" update="result @form"  >
+				
+			</p:commandButton>
+			
+			
+			<p:commandButton value="Cancel Order" action="#{orderMenuController.cancelOrder }" update="@form" immediate="true">
+				<p:confirm header="Confirmation" message="Are you sure to cancel Order?" icon="ui-icon-alert" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		
+		</p:tab>
+		
+	</p:tabView>
+		<p:dock position="bottom">
+	    <p:menuitem value="Home" icon="/resources/icon/home.png" url="home.xhtml"/>
+	    <p:menuitem value="Customer" icon="/resources/icon/customer.png" url="customer.xhtml"/>
+	    <p:menuitem value="Menu" icon="/resources/icon/food.png" url="menu.jsp"/>
+	    <p:menuitem value="Order" icon="/resources/icon/Cart.png" url="#"/>
+	</p:dock>
+	
+	<p:tooltip for="logout" value="Logout" showEffect="clip" position="left"></p:tooltip>
+
+</h:form>
+</f:view>
+</h:body>
+</html>

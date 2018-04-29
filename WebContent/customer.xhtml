@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui"
+    xmlns:of="http://omnifaces.org/functions" >
+<h:head><title>Customer</title><h:outputStylesheet name="style.css" library="css" />
+</h:head><h:body>
+<f:view>
+<h:form id="myform">
+
+	<p:growl id="edit" showDetail="true" sticky="false" ></p:growl>
+	<div id="logo">
+	
+		<div id="bolom">
+			<h:graphicImage  value="/resources/icon/2Restoran.png" width="150px" ></h:graphicImage>
+		</div>
+		
+		<div id="text">
+			<h:graphicImage  value="/resources/icon/text.png" ></h:graphicImage>
+		</div>
+	</div>
+	<div>
+		<h:commandButton immediate="true" id="logout" image="/resources/icon/56805.png"  action="logout" style="width:50px; height:50px; float:right; margin-top:-90px;">
+			<o:skipValidators></o:skipValidators>
+		 </h:commandButton>
+	</div>
+	
+	<p:tabView dynamic="false" cache="true">
+		<p:tab title="View Customer">
+			<h3 style="text-align: center;">Manage Customers</h3>
+			<p:dataTable rowIndexVar="row" id="custDetails" var="c" value="#{customerController.customers }" scrollable="true" scrollHeight="200" editable="true">
+				  <p:ajax event="rowEditCancel" listener="#{customerController.populate}" update=":myform:edit" />
+ 
+				 <p:ajax event="rowEdit" immediate="true" listener="#{customerController.onRowEdit}" update=":myform:edit, custDetails" >
+				 	<o:skipValidators></o:skipValidators>
+				 </p:ajax>
+       				
+ 
+				<p:column headerText="Customer Id" >
+					<h:outputText value="#{c.cId}"></h:outputText>
+					<f:facet name="footer">
+							       			
+		       		</f:facet>
+				</p:column>
+				<p:column headerText="Name" >
+					<h:outputText value="#{c.cName}"></h:outputText>
+					 <f:facet name="footer">
+		       			<p:inputText value="#{customerController.cName }" required="true" id="name" label="Name" update=":myform:edit"  >
+							<f:validateRegex pattern="[a-zA-Z ]+"></f:validateRegex>
+					 	</p:inputText>
+		      		 </f:facet>
+				</p:column>
+				<p:column headerText="Gender" >
+					<h:outputText value="#{c.cGender}"></h:outputText>
+					  <f:facet name="footer">
+				       		<h:selectOneRadio value="#{customerController.cGender }"  id="gender" label="Gender" required="true" update=":myform:edit">
+								<f:selectItem itemLabel="M" itemValue="m"/>
+								<f:selectItem itemLabel="F" itemValue="f"/>
+								<f:validateBean disabled="false"/>
+							</h:selectOneRadio>
+				       </f:facet>
+				</p:column>
+				<p:column headerText="Address" >					
+		            <h:outputText value="#{c.cAddress}" />		           
+		           
+		            <f:facet name="footer">
+		       			<p:inputText value="#{customerController.cAddress }" update=":myform:edit" required="true" id="address" label="Address" >
+							<f:validateRegex pattern="[a-zA-Z0-9 ]+"></f:validateRegex>
+						</p:inputText>	
+		       		</f:facet>				
+				</p:column>
+				<p:column headerText="Phone" >
+					
+		           <h:outputText value="#{c.cPhone}" />
+		               
+		           <f:facet name="footer">
+		       			<p:inputText value="#{customerController.cPhone}" update=":myform:edit" required="true" id="tel" label="Telephone" >
+							<f:validateLength minimum="7" maximum="8"></f:validateLength>
+					 	</p:inputText>
+		      		 </f:facet>	
+					
+			  </p:column>	
+			  
+			   <p:column headerText="Edit">					
+					 <p:commandLink  immediate="true" value="Edit" actionListener="#{customerController.populate(c.cId)}" update="save"  />
+				</p:column>			
+		       
+		       <p:column headerText="Action">
+					<p:growl id="message" showDetail="true" sticky="false"/>
+					 <p:commandLink  immediate="true" value="Delete" actionListener="#{customerController. deleteCustomer(c.cId)}" update="message @form"  >
+					 	<p:confirm header="Confirmation" message="Are you sure to delete customer?" icon="ui-icon-alert" />
+					 </p:commandLink>
+					 
+					 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				    </p:confirmDialog>
+				</p:column>
+						
+		        <f:facet name="footer" id="footer">
+		        	<p:growl id="cancel" showDetail="true" sticky="false"/>
+		       		<p:commandButton  id="save" value="Save Record" action="#{customerController.addCustomer }" update=":myform:edit, @form"  disabled="#{customerController.disabled}"></p:commandButton>
+					<p:commandButton  id="updateRec" value="Update Record" action="#{customerController.updateCustomer() }" update=":myform:edit, @form"></p:commandButton>
+					
+					
+					<p:commandButton  value="Cancel" action="#{customerController.clear}" >
+						<o:skipValidators></o:skipValidators>
+					</p:commandButton> 
+		       </f:facet>
+		       		       
+			</p:dataTable>
+		
+			
+			</p:tab>
+		
+	</p:tabView>
+	
+	
+	
+	<p:dock position="bottom">
+	    <p:menuitem value="Home" icon="/resources/icon/home.png" url="home.xhtml"/>
+	    <p:menuitem value="Customer" icon="/resources/icon/customer.png" url="customer.xhtml"/>
+	    <p:menuitem value="Menu" icon="/resources/icon/food.png" url="menu.jsp"/>
+	    <p:menuitem value="Order" icon="/resources/icon/Cart.png" url="order.xhtml"/>
+	</p:dock>
+	
+	<p:tooltip for="logout" value="Logout" showEffect="clip" position="left"></p:tooltip>
+
+</h:form>
+</f:view>
+</h:body>
+</html>

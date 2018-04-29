@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<h:head><title>Login</title>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head><h:body>
+<f:view>
+<h:form>
+	
+	<div id="logo">
+		
+	
+		<div id="bolom">
+			<h:graphicImage  value="/resources/icon/2Restoran.png" width="175px" ></h:graphicImage>
+		</div>
+		
+		<div id="text">
+			<h:graphicImage  value="/resources/icon/text.png" ></h:graphicImage>
+		</div>
+		
+		<div style="float: right; margin-top: -100px ">
+			<p><a href="adminlogin.jsp">Login as admin</a></p> 
+		
+		</div>
+		
+		
+		
+		
+	</div>
+	
+	<div id="container" >
+		<h:panelGrid columns="2" cellspacing="2" cellpadding="2">
+		<h:outputText value="Username: " style="color: #333"></h:outputText>
+		<p:inputText value="#{logController.username}" required="true" id="username" label="Username"></p:inputText>
+		
+		<h:outputText value="Password: " style="color: #333" ></h:outputText>
+		<p:password value="#{logController.password}" required="true" id="password" label="Password"></p:password>
+		</h:panelGrid>
+		<br></br>
+		<br></br>
+		
+		<div id="loginDiv">
+			<p:commandButton value="Login" actionListener="#{logController.hLogin}" update="result"></p:commandButton>
+			<p:commandButton value="Clear" actionListner="#{logController.clearInputs()}"></p:commandButton>
+			<p:growl id="result" showDetail="true" sticky="true" />  
+		</div>
+		
+		<br></br>
+		<br></br>
+		<p:message for="username" errorStyle="color:red"></p:message>
+		<p:message for="password" errorStyle="color:red"></p:message>
+	
+	
+	</div>
+	
+</h:form>
+</f:view>
+</h:body>
+</html>

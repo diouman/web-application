@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 25, 2018 10:01:01 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.Orders" table="orders">
+        <id name="oId" type="int" access="field">
+            <column name="oId" />
+            <generator class="increment" />
+        </id>
+        
+        <property name="date" type="java.sql.Date">
+            <column name="DATE" />
+        </property>
+        <property name="time" type="java.sql.Time">
+            <column name="TIME" />
+        </property>
+        <property name="total" type="double">
+            <column name="TOTAL" />
+        </property>
+        
+        <one-to-one name="cId" class="model.Customer"
+			cascade="save-update" ></one-to-one>
+        
+        
+        
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 25, 2018 11:11:58 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.Menu" table="MENU">
+        <id name="mId" type="int" access="field">
+            <column name="MID" />
+            <generator class="increment" />
+        </id>
+        <property name="mDesc" type="java.lang.String" access="field">
+            <column name="MDESC" />
+        </property>
+        <property name="mPrice" type="double" access="field">
+            <column name="MPRICE" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

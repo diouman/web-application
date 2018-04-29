@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 25, 2018 10:36:18 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.OrderLine" table="ORDERLINE">
+        <id name="oLId" type="int" access="field">
+            <column name="olId" />
+            <generator class="increment" />
+        </id>        
+        <property name="quantity" type="int">
+            <column name="quantity" />
+        </property>
+        <property name="subtotal" type="double">
+            <column name="subTotal" />
+        </property>
+        
+        <one-to-one name="mId" class="model.Menu" cascade="save-update"></one-to-one>
+        <one-to-one name="oId" class="model.Orders" cascade="save-update"></one-to-one>
+        
+       
+      
+    </class>
+</hibernate-mapping>

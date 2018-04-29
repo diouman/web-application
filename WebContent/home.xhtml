@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+<h:head><title>Home</title></h:head>
+<link href="${facesContext.externalContext.requestContextPath}/resources/css/style.css"  rel="stylesheet" type="text/css"/>
+<h:body>
+<f:view>
+<h:form>
+	<div id="logo">
+	
+		<div id="bolom">
+			<h:graphicImage  value="/resources/icon/2Restoran.png" width="200px" ></h:graphicImage>
+		</div>
+		
+		<div id="text">
+			<h:graphicImage  value="/resources/icon/text.png" ></h:graphicImage>
+		</div>
+	</div>
+	
+	<div>
+		<h:commandButton id="logout" image="/resources/icon/56805.png"  action="logout" style="width:50px; height:50px; float:right; margin-top:-125px;"> </h:commandButton>
+	</div>
+	
+	
+	<div id="nav">
+		<h:commandButton class="icon" id="home" image="/resources/icon/home.png" style="width:200px; height:200px" action="home.xhtml"> </h:commandButton>
+	  	<h:commandButton class="icon" id="customer" image="/resources/icon/customer.png" style="width:200px; height:200px" action="customer"> </h:commandButton>
+	   	<h:commandButton class="icon" id="menus" image="/resources/icon/food.png" style="width:200px; height:200px" action="menu.jsp"> </h:commandButton>   
+		<h:commandButton class="icon" id="order" image="/resources/icon/gift.png" style="width:200px; height:200px" action="order"> </h:commandButton>
+	  	
+	</div>
+	
+	
+	<p:tooltip for="home" value="Welcome Home" showEffect="clip"  position="left"></p:tooltip>
+	<p:tooltip for="customer" value="Manage Customer" showEffect="clip"  position="left"></p:tooltip>
+	<p:tooltip for="menus" value="Manage Menu" showEffect="clip"  position="left"></p:tooltip>
+	<p:tooltip for="order" value="Manage Order" showEffect="clip"  position="left"></p:tooltip>
+	<p:tooltip for="logout" value="Logout" showEffect="clip" position="left"></p:tooltip>
+	      	
+           
+</h:form>
+</f:view>
+</h:body>
+</html>
